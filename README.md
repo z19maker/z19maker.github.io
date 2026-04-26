@@ -1,6 +1,6 @@
----
 
-- **Goal:** Make meaningful contributions. 
+
+**Goal:** Make meaningful contributions. 
 - **Languages:** Rust, Python. 
 - **Interests:** Fútbol, Chess, Pokémon.
 
