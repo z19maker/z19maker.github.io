@@ -9,6 +9,11 @@
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Jk7q8rgfjiI?si=dNcoR6e2QGSzFZXM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+---
+
+**Code is available [here: https://github.com/z19maker/AutoVocab/](https://github.com/z19maker/AutoVocab)**
+
+
 **How to run.** 
 
 requires:
