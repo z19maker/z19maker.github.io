@@ -20,7 +20,7 @@ requires:
 - uv. [How to download?](https://github.com/astral-sh/uv)
 - python3. [How to download?](https://realpython.com/installing-python/)
 - ffmpeg. [How to download?](https://www.wikihow.com/Install-FFmpeg-on-Windows)
-- jmdict. [What is this?](https://github.com/yomidevs/jmdict-yomitan), [Download from releases page](https://github.com/yomidevs/jmdict-yomitan/releases)
+- jmdict. [What is this?](https://github.com/scriptin/jmdict-simplified), [Download from releases page](https://github.com/scriptin/jmdict-simplified/releases)
 
 ```
 uv venv init
