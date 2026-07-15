@@ -23,10 +23,12 @@ requires:
 - jmdict. [What is this?](https://github.com/scriptin/jmdict-simplified), [Download from releases page](https://github.com/scriptin/jmdict-simplified/releases)
 
 ```
-uv venv init
+uv venv 
 source venv/bin/activate
 uv pip install -r requirements.txt
 ```
+
+rename your jmdict json file to `jmdict.json` and move the file to code/AutoVocab.
 
 main.py is an executable file that requires python.  
 ```
