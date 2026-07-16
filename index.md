@@ -10,6 +10,8 @@ Pantograph released their research about the training method for agents which op
 
 [click here to read](/mc-rl-7-15-26)
 
+*Thursday July 16, 2026*
+
 ---
 
 `autovocab` initial prototype finished! 
