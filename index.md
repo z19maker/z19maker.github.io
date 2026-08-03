@@ -4,6 +4,14 @@ thank you for reading.
 
 ---
 
+My *JAX* notes!
+
+[click here to read](/jax-8-3-26)
+
+*Monday August 3rd, 2026*
+
+---
+
 Minecraft, Reinforcement Learning, Pantograph! 
 
 Pantograph released their research about the training method for agents which operate in minecraft. This article covers my breakdown of their research, an applied review of jax (train agents in Tic Tac Toe), recreating their research and applying for a job as a research scientist at Pantograph. 
