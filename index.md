@@ -1,29 +1,46 @@
-welcome to *z19maker*'s web site. 
-
-thank you for reading.
+welcome to *z19maker*'s web site
 
 ---
 
-My *JAX* notes!
+## CUDA from the ground up!
 
-[click here to read](/jax-8-3-26)
+[CUDA Review](/cuda_review)
+- getting started writing Cuda kernels
+- writing the naive dot product product implementation
+- improving dot product implementation using tiling
+- learning about the memory hierarchies
+- using Nvidia Nsight Compute to evaluate a kernel
 
-*Monday August 3rd, 2026*
+[MLP CUDA Optimizations](/mlp_cuda_optimizations)
 
----
-
-Minecraft, Reinforcement Learning, Pantograph! 
-
-Pantograph released their research about the training method for agents which operate in minecraft. This article covers my breakdown of their research, an applied review of jax (train agents in Tic Tac Toe), recreating their research and applying for a job as a research scientist at Pantograph. 
-
-[click here to read](/mc-rl-7-15-26)
-
-*Thursday July 16, 2026*
+~ *Wednesday August 12, 2026*
 
 ---
 
-`autovocab` initial prototype finished! 
+## Neural Networks from the ground up!
+
+[Multi Layer Perceptron Forward Pass](/mlp_forward_pass)
+- understanding how data flows through a neural network
+
+[Multi Layer Perceptron Backward Pass](/mlp_backward_pass)
+- utilizing gradient descent to modify the weights and biases of the neural network to increase accuracy
+
+I utilize `numpy` to create a simple neural network that recognizes digits.
+
+~ *Wednesday August 12, 2026*
+
+---
+
+## `autovocab` initial prototype finished! 
 
 [click here to read](/autovocab-7-15-26)
 
-*Wednesday July 15, 2026*
+This project takes any video that is in Japanese and outputs an Anki flash card deck!
+ 
+1. the video footage is turned into an audio track.
+2. the audio track is turned into a transcript.
+3. the transcript is parsed for words.
+4. the words are translated from Japanese to English
+5. the vocabulary is turned into `.csv` that can be injected by Anki (A flash card application)
+
+~ *Wednesday July 15, 2026*
