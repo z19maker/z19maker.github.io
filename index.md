@@ -2,6 +2,12 @@ welcome to *z19maker*'s web site
 
 ---
 
+## Learning japanese
+
+[japanese_words_v2](/japanese-words-v2)
+
+---
+
 ## CUDA from the ground up!
 
 [CUDA Review](/cuda_review)
