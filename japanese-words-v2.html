@@ -1,0 +1,368 @@
+`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Common Japanese Phrases</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f7f4ef;
+      color: #222;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px 30px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      color: #777;
+      margin-top: 10px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .instructions {
+      text-align: center;
+      color: #888;
+      margin-bottom: 25px;
+    }
+
+    .phrase-card {
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      border: 1px solid #eee;
+    }
+
+    .japanese {
+      width: 100%;
+      border: none;
+      background: white;
+      cursor: pointer;
+      padding: 24px;
+      text-align: center;
+      font-size: 2rem;
+      font-family: "Noto Sans JP", sans-serif;
+      transition: background 0.2s;
+    }
+
+    .japanese:hover {
+      background: #faf8f5;
+    }
+
+    .arrow {
+      font-size: 0.8rem;
+      color: #aaa;
+      margin-left: 8px;
+    }
+
+    .details {
+      display: none;
+      border-top: 1px solid #eee;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .details.open {
+      display: block;
+    }
+
+    .translation {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .romaji {
+      display: none;
+      color: #777;
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+
+    .romaji.show {
+      display: block;
+    }
+
+    .romaji-button {
+      border: none;
+      background: #222;
+      color: white;
+      padding: 9px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .romaji-button:hover {
+      background: #444;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>日本語</h1>
+    <p>Common Japanese Phrases</p>
+  </header>
+
+  <main class="container">
+
+    <div class="instructions">
+      Click a Japanese phrase to reveal the English translation.
+    </div>
+
+    <!-- Cards are generated here -->
+    <div id="phrase-container"></div>
+
+  </main>
+
+  <script>
+
+    /*
+     * ============================================================
+     * CSV DATA
+     * ============================================================
+     *
+     * Add more rows to this variable to add more phrase cards.
+     *
+     * Columns:
+     * japanese, english, romaji
+     */
+
+     const csvData = `japanese,english,romaji
+     こんにちは,Hello / Good afternoon,Konnichiwa
+     おはようございます,Good morning,Ohayō gozaimasu
+     こんばんは,Good evening,Konbanwa
+     おやすみなさい,Good night,Oyasumi nasai
+     ありがとう,Thank you,Arigatō
+     ありがとうございます,Thank you (polite),Arigatō gozaimasu
+     どういたしまして,You're welcome,Dō itashimashite
+     すみません,Excuse me / Sorry,Sumimasen
+     ごめんなさい,I'm sorry,Gomen nasai
+     お願いします,Please / I'd appreciate it,Onegaishimasu
+     どうぞ,Here you go / Please,Dōzo
+     大丈夫です,I'm okay / It's alright,Daijōbu desu
+     わかりません,I don't understand,Wakarimasen
+     わかりました,I understand / Got it,Wakarimashita
+     またね,See you / Bye,Mata ne
+     さようなら,Goodbye,Sayōnara
+     本当？,Really?,Hontō?
+     すごい！,Amazing! / Wow!,Sugoi!
+     かわいい！,Cute!,Kawaii!
+     かっこいい！,Cool! / Good-looking!,Kakkoii!
+     約束,promise,Yakusoku
+     約束する,to promise,Yakusoku suru
+     ハンター,Hunter,Hantā
+     ハンター試験,Hunter Exam,Hantā shiken
+     試験,exam / test,Shiken
+     受ける,to take / sit for (an exam),Ukeru
+     申し込む,to apply / sign up,Mōshikomu
+     応募する,to apply / enter,Ōbo suru
+     島,island,Shima
+     くじら島,Whale Island,Kujira-tō
+     父親,father,Chichioya
+     親父,dad / old man,O-yaji
+     おばさん,aunt / older woman,Obasan
+     親父さん,one's father / dad,O-yaji-san
+     息子,son,Musuko
+     息子さん,someone's son,Musuko-san
+     森,forest,Mori
+     動物,animal,Dōbutsu
+     魚,fish,Sakana
+     釣る,to fish / catch with a hook,Tsuru
+     釣り,fishing,Tsuri
+     沼,swamp / marsh,Numa
+     主,lord / master,Nushi
+     大きい,big / large,Ōkii
+     危ない,dangerous,Abunai
+     危険,danger / dangerous,Kiken
+     気をつけて,Be careful,Ki o tsukete
+     行く,to go,Iku
+     行ってくる,I'm going / I'll be back,Itte kuru
+     帰る,to return / go home,Kaeru
+     帰ってくる,to come back,Kaette kuru
+     会う,to meet,A u
+     会いたい,I want to meet,Aitai
+     知っている,to know / be aware,Shitte iru
+     知ってた,I knew / You knew,Shitteta
+     生きている,to be alive / living,Ikite iru
+     死ぬ,to die,Shinu
+     死んだ,died / dead,Shinda
+     育てる,to raise / bring up,Sodateru
+     守る,to protect,Mamoru
+     別れる,to part / say goodbye,Wakareru
+     出発する,to depart / set out,Shuppatsu suru
+     立派な,great / respectable / splendid,Rippa na
+     頑張る,to do one's best / work hard,Ganbaru
+     すごい仕事,amazing job / incredible job,Sugoi shigoto
+     お父さん,father / dad,Otōsan
+     お母さん,mother / mom,Okāsan
+     ジン,Ging,Jin
+     カイト,Kite,Kaito
+     ミト,Mito,Mito
+     コン,Kon,Kon
+     `;
+
+    /*
+     * ============================================================
+     * CSV PARSER
+     * ============================================================
+     *
+     * Converts the CSV text into an array of objects.
+     */
+
+    function parseCSV(csv) {
+      const lines = csv.trim().split(/\r?\n/);
+
+      const headers = lines[0]
+        .split(",")
+        .map(header => header.trim());
+
+      return lines.slice(1).map(line => {
+        const values = line.split(",");
+
+        const row = {};
+
+        headers.forEach((header, index) => {
+          row[header] = values[index]?.trim() || "";
+        });
+
+        return row;
+      });
+    }
+
+
+    /*
+     * ============================================================
+     * CREATE CARDS
+     * ============================================================
+     *
+     * Takes CSV data and creates all phrase cards.
+     */
+
+    function createCardsFromCSV(csv) {
+
+      const phrases = parseCSV(csv);
+
+      const container = document.getElementById("phrase-container");
+
+      // Clear existing cards
+      container.innerHTML = "";
+
+      phrases.forEach(phrase => {
+
+        // Card
+        const card = document.createElement("div");
+        card.className = "phrase-card";
+
+        // Japanese button
+        const japaneseButton = document.createElement("button");
+        japaneseButton.className = "japanese";
+
+        japaneseButton.innerHTML = `
+          ${phrase.japanese}
+          <span class="arrow">▼</span>
+        `;
+
+        // Details section
+        const details = document.createElement("div");
+        details.className = "details";
+
+        // English translation
+        const translation = document.createElement("div");
+        translation.className = "translation";
+        translation.textContent = phrase.english;
+
+        // Romaji
+        const romaji = document.createElement("div");
+        romaji.className = "romaji";
+        romaji.textContent = phrase.romaji;
+
+        // Romaji button
+        const romajiButton = document.createElement("button");
+        romajiButton.className = "romaji-button";
+        romajiButton.textContent = "Show Romaji";
+
+        /*
+         * Clicking the Japanese phrase opens/closes
+         * the English translation.
+         */
+        japaneseButton.addEventListener("click", () => {
+
+          details.classList.toggle("open");
+
+          if (details.classList.contains("open")) {
+            japaneseButton.querySelector(".arrow").textContent = "▲";
+          } else {
+            japaneseButton.querySelector(".arrow").textContent = "▼";
+          }
+
+        });
+
+
+        /*
+         * Clicking the Romaji button shows/hides
+         * the Romanized pronunciation.
+         */
+        romajiButton.addEventListener("click", () => {
+
+          romaji.classList.toggle("show");
+
+          if (romaji.classList.contains("show")) {
+            romajiButton.textContent = "Hide Romaji";
+          } else {
+            romajiButton.textContent = "Show Romaji";
+          }
+
+        });
+
+
+        // Assemble details
+        details.appendChild(translation);
+        details.appendChild(romaji);
+        details.appendChild(romajiButton);
+
+        // Assemble card
+        card.appendChild(japaneseButton);
+        card.appendChild(details);
+
+        // Add card to page
+        container.appendChild(card);
+
+      });
+    }
+
+
+    /*
+     * ============================================================
+     * INITIALIZE
+     * ============================================================
+     */
+
+    createCardsFromCSV(csvData);
+
+  </script>
+
+</body>
+</html>
